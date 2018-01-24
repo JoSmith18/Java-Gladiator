@@ -21,16 +21,30 @@ Gladiator(String name){
 
 
 public void attack(Gladiator defender){
-    System.out.println("I am coming!!");
-    defender.health -= rand.nextInt(this.high) + this.low;
+    if (rand.nextInt(100) + 1 < this.rage){
+        int attack = rand.nextInt(this.high) + this.low;
+        defender.health -= 2 * attack;
     defender.health = Integer.max(defender.health, 0);
-    this.rage += 15;
+    System.out.println("That Was My Crit Hit for " + attack+ "!!");
+    this.rage = 0;} else{
+        int attack = rand.nextInt(this.high) + this.low;
+        defender.health -= attack;
+        defender.health = Integer.max(defender.health, 0);
+        this.rage += 15;
+        System.out.println("That Hit Landed for "+ attack + ".");
+    }
+
 }
 
 public void heal(){
     if (this.rage > 10){
         this.health += 10;
+        this.rage -= 10;
     }
+}
+
+public void skip(){
+    this.rage += 15;
 }
 
 public boolean isDead(){

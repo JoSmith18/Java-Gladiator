@@ -9,6 +9,8 @@ public class Main {
             attacker.attack(defender);
         } else if (move.equals("H")){
             attacker.heal();
+        } else if (move.equals("S")){
+            attacker.skip();
         } else {System.out.println("Your Turn Has Been Skipped Because Of Your Choice!!");}
     }
 
@@ -30,7 +32,7 @@ public class Main {
 
             if (!fighter2.isDead()){
             Scanner moves = new Scanner(System.in);
-            System.out.println("[A]ttack\n[H]eal");
+            System.out.println("[A]ttack\n[H]eal\n[S]kip");
             String move = moves.next().toUpperCase();
             doMove(fighter1, fighter2, move);
                 System.out.println(fighter2.name + " | Health: " + fighter2.health + " | Rage: " + fighter2.rage);
@@ -39,7 +41,7 @@ public class Main {
 
             if (!fighter1.isDead()){
             Scanner moves2 = new Scanner(System.in);
-            System.out.println("[A]ttack\n[H]eal");
+            System.out.println("[A]ttack\n[H]eal\n[S]kip");
             String move2 = moves2.nextLine().toUpperCase();
             doMove(fighter2, fighter1, move2);
                 System.out.println(fighter1.name + " | Health: " + fighter1.health + " | Rage: " + fighter1.rage);
