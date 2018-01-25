@@ -14,7 +14,7 @@ public class Main {
             attacker.heal();
         } else if (move.equals("S")){
             attacker.skip();
-        } else {System.out.println("Your Turn Has Been Skipped Because Of Your Choice!!");}
+        }else {System.out.println("Your Turn Has Been Skipped Because Of Your Choice!!");}
     }
 
 public static String findName(String letter){
@@ -26,6 +26,16 @@ public static String findName(String letter){
 
 
 }
+public static Gladiator createFighter(String type, String name){
+    if (type.equals("F")) {
+        return new Fighter(name);
+    } else if (type.equals("N"))
+    {return new Ninja(name);}
+    else if (type.equals("U")){
+        return new UFCFIGHTER(name);
+    }
+    return new Fighter(name);
+    }
 
 public static void battle(Gladiator attacker, Gladiator defender, boolean human){
     String move = "A";
@@ -53,18 +63,25 @@ public static void battle(Gladiator attacker, Gladiator defender, boolean human)
         String versus = mode.next();
         if (versus.equals("1")){
         Scanner input = new Scanner(System.in);
+        Scanner type = new Scanner(System.in);
         System.out.println("Gladiator 1 Name ->");
         String fighter1Name = input.nextLine();
-        Gladiator fighter1 = new Fighter(fighter1Name);
+        System.out.println("Gladiator Type:\n\t[F]ighter\n\t[N]inja\n\t[U]fcFighter");
+        String fighterType = type.nextLine().toUpperCase();
+
+        Gladiator fighter1 = createFighter(fighterType, fighter1Name);
         fighter1.setName(fighter1Name);
         System.out.println(fighter1.getName() + " | DamageLow: " + fighter1.getLow() + " |DamageHigh: " + fighter1.getHigh());
 
         Scanner input2 = new Scanner(System.in);
+        Scanner type2 = new Scanner(System.in);
         System.out.println("Gladiator 2 Name ->");
         String fighter2Name = input2.nextLine();
-        Gladiator fighter2 = new Fighter(fighter2Name);
-        fighter2.setName(fighter2Name);
+        System.out.println("Gladiator Type:\n\t[F]ighter\n\t[N]inja\n\t[U]fcFighter");
+        String fighterType2 = type2.nextLine().toUpperCase();
 
+        Gladiator fighter2 = createFighter(fighterType2, fighter2Name);
+        fighter2.setName(fighter2Name);
         System.out.println(fighter2.getName() + " | DamageLow: " + fighter2.getLow() + " |DamageHigh: " + fighter2.getHigh());
 
         while (true){
@@ -83,16 +100,24 @@ public static void battle(Gladiator attacker, Gladiator defender, boolean human)
 
         else if (versus.equals("2")){
             Scanner input = new Scanner(System.in);
+            Scanner type = new Scanner(System.in);
             System.out.println("Gladiator 1 Name ->");
             String fighter1Name = input.nextLine();
-            Gladiator fighter1 = new Fighter(fighter1Name);
+            System.out.println("Gladiator Type:\n\t[F]ighter\n\t[N]inja\n\t[U]fcFighter");
+            String fighterType = type.nextLine().toUpperCase();
+
+            Gladiator fighter1 = createFighter(fighterType, fighter1Name);
             fighter1.setName(fighter1Name);
             System.out.println(fighter1.getName() + " | DamageLow: " + fighter1.getLow() + " |DamageHigh: " + fighter1.getHigh());
 
+            Scanner type2 = new Scanner(System.in);
             Scanner input2 = new Scanner(System.in);
             System.out.println("Pick The CPU:\n\t[J]o\n\t[T]rey\n\t[S]hedlia\n\t[E]dgar");
             String fighter2Name = findName(input2.nextLine().toUpperCase());
-            Gladiator fighter2 = new Fighter(fighter2Name);
+            System.out.println("CPU Type:\n\t[F]ighter\n\t[N]inja\n\t[U]fcFighter");
+            String fighterType2 = type2.nextLine().toUpperCase();
+
+            Gladiator fighter2 = createFighter(fighterType2, fighter2Name);
             fighter2.setName(fighter2Name);
             System.out.println(fighter2.getName() + " | DamageLow: " + fighter2.getLow() + " |DamageHigh: " + fighter2.getHigh());
 
