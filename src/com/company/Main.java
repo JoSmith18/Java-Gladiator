@@ -1,6 +1,9 @@
 package com.company;
 
+import java.sql.Array;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -14,39 +17,98 @@ public class Main {
         } else {System.out.println("Your Turn Has Been Skipped Because Of Your Choice!!");}
     }
 
-    public static void main(String[] args) {
+public static String findName(String letter){
+        if (letter.equals("J")){return "Jo";}
+        else if (letter.equals("T")){return "Trey";}
+        else if (letter.equals("S")){return "Shedlia";}
+        else if (letter.equals("E")){return "Edgar";}
+        return "The Boss";
 
+
+}
+
+public static void battle(Gladiator attacker, Gladiator defender, boolean human){
+    String move = "A";
+    if (human){
+        Scanner moves = new Scanner(System.in);
+        System.out.println("[A]ttack\n[H]eal\n[S]kip");
+        move = moves.next().toUpperCase();
+    } else {
+        Random rand = new Random();
+        String[] moves = {"A","A","A","S","A"};
+        move = moves[rand.nextInt(5)];
+    }
+    doMove(attacker, defender, move);
+    System.out.println(defender);
+    try {
+        Thread.sleep(750);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+
+}
+    public static void main(String[] args) {
+        Scanner mode = new Scanner(System.in);
+        System.out.println("Pick The Versus:\n\t1.Human Vs Human\n\t2.Human Vs CPU");
+        String versus = mode.next();
+        if (versus.equals("1")){
         Scanner input = new Scanner(System.in);
         System.out.println("Gladiator 1 Name ->");
         String fighter1Name = input.nextLine();
-        Gladiator fighter1 = new Gladiator(fighter1Name);
-        System.out.println(fighter1.name + " | DamageLow: " + fighter1.low + " |DamageHigh: " + fighter1.high);
+        Gladiator fighter1 = new Fighter(fighter1Name);
+        fighter1.setName(fighter1Name);
+        System.out.println(fighter1.getName() + " | DamageLow: " + fighter1.getLow() + " |DamageHigh: " + fighter1.getHigh());
 
         Scanner input2 = new Scanner(System.in);
         System.out.println("Gladiator 2 Name ->");
         String fighter2Name = input2.nextLine();
-        Gladiator fighter2 = new Gladiator(fighter2Name);
-        System.out.println(fighter2.name + " | DamageLow: " + fighter2.low + " |DamageHigh: " + fighter2.high);
+        Gladiator fighter2 = new Fighter(fighter2Name);
+        fighter2.setName(fighter2Name);
+
+        System.out.println(fighter2.getName() + " | DamageLow: " + fighter2.getLow() + " |DamageHigh: " + fighter2.getHigh());
 
         while (true){
 
             if (!fighter2.isDead()){
-            Scanner moves = new Scanner(System.in);
-            System.out.println("[A]ttack\n[H]eal\n[S]kip");
-            String move = moves.next().toUpperCase();
-            doMove(fighter1, fighter2, move);
-                System.out.println(fighter2.name + " | Health: " + fighter2.health + " | Rage: " + fighter2.rage);
-            if (fighter2.isDead()){System.out.println(fighter1.name + " WINS!!"); break;}}
+                battle(fighter1, fighter2, true);
+                if (fighter2.isDead()){System.out.println(fighter1.getName() + " WINS!!"); break;}
+            }
 
 
             if (!fighter1.isDead()){
-            Scanner moves2 = new Scanner(System.in);
-            System.out.println("[A]ttack\n[H]eal\n[S]kip");
-            String move2 = moves2.nextLine().toUpperCase();
-            doMove(fighter2, fighter1, move2);
-                System.out.println(fighter1.name + " | Health: " + fighter1.health + " | Rage: " + fighter1.rage);
-                if (fighter1.isDead()){System.out.println(fighter2.name + " WINS!!"); break;}}
+                battle(fighter2, fighter1, true);
+                    if (fighter1.isDead()){System.out.println(fighter2.getName() + " WINS!!"); break;}}
+        }
+        }
+
+        else if (versus.equals("2")){
+            Scanner input = new Scanner(System.in);
+            System.out.println("Gladiator 1 Name ->");
+            String fighter1Name = input.nextLine();
+            Gladiator fighter1 = new Fighter(fighter1Name);
+            fighter1.setName(fighter1Name);
+            System.out.println(fighter1.getName() + " | DamageLow: " + fighter1.getLow() + " |DamageHigh: " + fighter1.getHigh());
+
+            Scanner input2 = new Scanner(System.in);
+            System.out.println("Pick The CPU:\n\t[J]o\n\t[T]rey\n\t[S]hedlia\n\t[E]dgar");
+            String fighter2Name = findName(input2.nextLine().toUpperCase());
+            Gladiator fighter2 = new Fighter(fighter2Name);
+            fighter2.setName(fighter2Name);
+            System.out.println(fighter2.getName() + " | DamageLow: " + fighter2.getLow() + " |DamageHigh: " + fighter2.getHigh());
+
+            while (true){
+
+                if (!fighter2.isDead()){
+                    battle(fighter1, fighter2, true);
+
+                    if (fighter2.isDead()){System.out.println(fighter1.getName() + " WINS!!"); break;}}
+
+
+                if (!fighter1.isDead()){
+                    battle(fighter2, fighter1, false);
+                    if (fighter1.isDead()){System.out.println(fighter2.getName() + " WINS!!"); break;}}
+            }}
         }
 
     }
-}
+
