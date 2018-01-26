@@ -2,7 +2,9 @@ package com.company;
 
 import java.util.Random;
 
-public class Ninja implements Gladiator {
+public class
+
+Ninja implements Gladiator {
     public String name;
     public Integer health;
     public Integer rage;
@@ -18,15 +20,18 @@ public class Ninja implements Gladiator {
         this.name = name;
     }
 
-    public void setHealth(Integer health) {
-        this.health = health;
+    public void setHealth(int health) {
+        Integer h;
+        h = Integer.max(0, health);
+        h = Integer.min(200, h);
+        this.health = h;
     }
 
     public Integer getRage() {
         return rage;
     }
 
-    public void setRage(Integer rage) {
+    public void setRage(int rage) {
         this.rage = rage;
     }
 
@@ -34,7 +39,7 @@ public class Ninja implements Gladiator {
         return low;
     }
 
-    public void setLow(Integer low) {
+    public void setLow(int low) {
         this.low = low;
     }
 
@@ -42,7 +47,7 @@ public class Ninja implements Gladiator {
         return high;
     }
 
-    public void setHigh(Integer high) {
+    public void setHigh(int high) {
         this.high = high;
     }
 
@@ -71,11 +76,6 @@ public class Ninja implements Gladiator {
     public Integer getHealth() {
         return health;
     }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
 
     public void attack(Gladiator defender){
         if (rand.nextInt(100) + 1 < rage){

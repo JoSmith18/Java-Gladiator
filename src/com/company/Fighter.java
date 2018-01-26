@@ -17,15 +17,18 @@ Random rand = new Random();
         this.name = name;
     }
 
-    public void setHealth(Integer health) {
-        this.health = health;
+    public void setHealth(int health) {
+        Integer h;
+        h = Integer.max(0, health);
+        h = Integer.min(100, h);
+        this.health = h;
     }
 
     public Integer getRage() {
         return rage;
     }
 
-    public void setRage(Integer rage) {
+    public void setRage(int rage) {
         this.rage = rage;
     }
 
@@ -33,7 +36,7 @@ Random rand = new Random();
         return low;
     }
 
-    public void setLow(Integer low) {
+    public void setLow(int low) {
         this.low = low;
     }
 
@@ -41,7 +44,7 @@ Random rand = new Random();
         return high;
     }
 
-    public void setHigh(Integer high) {
+    public void setHigh(int high) {
         this.high = high;
     }
 
@@ -71,13 +74,10 @@ Random rand = new Random();
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     public void attack(Gladiator defender){
     if (rand.nextInt(100) + 1 < rage){
-        int attack = rand.nextInt(high) + low;
+        int attack = high + low;
         defender.setHealth(defender.getHealth() - 2 * attack);
     defender.setHealth(Integer.max(defender.getHealth(), 0));
     System.out.println("That Was My Crit Hit for " + attack+ "!!");

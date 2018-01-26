@@ -3,9 +3,9 @@ package com.company;
 public interface Gladiator {
     String getName();
     void setName(String name);
-    void setLow(Integer Low);
-    void setHigh(Integer High);
-    void setRage(Integer Rage);
+    void setLow(int Low);
+    void setHigh(int High);
+    void setRage(int Rage);
     Integer getLow();
     Integer getHigh();
     Integer getRage();
